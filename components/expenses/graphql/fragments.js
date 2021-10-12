@@ -145,7 +145,6 @@ export const expensePageExpenseFieldsFragment = gqlV2/* GraphQL */ `
       }
       stats {
         totalExpensesReceived {
-          value
           valueInCents
           currency
         }
@@ -206,10 +205,6 @@ export const expensePageExpenseFieldsFragment = gqlV2/* GraphQL */ `
       }
 
       stats {
-        totalAmountReceived {
-          value
-          currency
-        }
         balanceWithBlockedFunds {
           valueInCents
           currency
