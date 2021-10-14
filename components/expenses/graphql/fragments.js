@@ -148,7 +148,7 @@ export const expensePageExpenseFieldsFragment = gqlV2/* GraphQL */ `
           valueInCents
           currency
         }
-        totalExpensesReceived: totalAmountReceived(kind: [EXPENSE]) {
+        totalExpensesReceived: totalAmountReceived(kind: [EXPENSE], dateFrom: $totalExpensesReceivedDateFrom) {
           valueInCents
           currency
         }

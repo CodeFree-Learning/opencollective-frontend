@@ -57,7 +57,7 @@ const messages = defineMessages({
 });
 
 const expensePageQuery = gqlV2/* GraphQL */ `
-  query ExpensePage($legacyExpenseId: Int!, $draftKey: String) {
+  query ExpensePage($legacyExpenseId: Int!, $draftKey: String, $totalExpensesReceivedDateFrom: DateTime) {
     expense(expense: { legacyId: $legacyExpenseId }, draftKey: $draftKey) {
       ...ExpensePageExpenseFields
     }
@@ -711,8 +711,18 @@ class ExpensePage extends React.Component {
   }
 }
 
+const firstOfCurrentYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
 const addExpensePageData = graphql(expensePageQuery, {
-  options: { context: API_V2_CONTEXT },
+  options(props) {
+    return {
+      variables: {
+        legacyExpenseId: props.legacyExpenseId,
+        draftKey: props.draftKey,
+        totalExpensesReceivedDateFrom: firstOfCurrentYear,
+      },
+      context: API_V2_CONTEXT,
+    };
+  },
 });
 
 const addEditExpenseMutation = graphql(editExpenseMutation, {
