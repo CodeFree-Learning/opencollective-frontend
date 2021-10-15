@@ -56,7 +56,6 @@ const getVariableFromProps = props => {
     draftKey: props.draftKey,
     totalExpensesReceivedDateFrom: firstOfCurrentYear,
     collectiveSlug: props.collectiveSlug,
-    legacyExpenseId: props.legacyExpenseId,
   };
 };
 
