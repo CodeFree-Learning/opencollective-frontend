@@ -143,16 +143,6 @@ export const expensePageExpenseFieldsFragment = gqlV2/* GraphQL */ `
         data
         isSaved
       }
-      stats {
-        totalAmountReceived: totalAmountReceived {
-          valueInCents
-          currency
-        }
-        totalExpensesReceived: totalAmountReceived(kind: [EXPENSE], dateFrom: $totalExpensesReceivedDateFrom) {
-          valueInCents
-          currency
-        }
-      }
 
       # For Collectives, Funds, Events and Projects
       ... on AccountWithHost {
