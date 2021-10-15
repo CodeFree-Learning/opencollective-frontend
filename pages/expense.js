@@ -49,6 +49,17 @@ import { H1, H5, Span } from '../components/Text';
 import { TOAST_TYPE, withToasts } from '../components/ToastProvider';
 import { withUser } from '../components/UserProvider';
 
+const getVariableFromProps = props => {
+  const firstOfCurrentYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
+  return {
+    legacyExpenseId: props.legacyExpenseId,
+    draftKey: props.draftKey,
+    totalExpensesReceivedDateFrom: firstOfCurrentYear,
+    collectiveSlug: props.collectiveSlug,
+    legacyExpenseId: props.legacyExpenseId,
+  };
+};
+
 const messages = defineMessages({
   title: {
     id: 'ExpensePage.title',
@@ -330,9 +341,9 @@ class ExpensePage extends React.Component {
   }
 
   clonePageQueryCacheData() {
-    const { client, legacyExpenseId, collectiveSlug } = this.props;
+    const { client } = this.props;
     const query = expensePageQuery;
-    const variables = { collectiveSlug, legacyExpenseId };
+    const variables = getVariableFromProps(this.props);
     const data = cloneDeep(client.readQuery({ query, variables }));
     return [data, query, variables];
   }
@@ -713,13 +724,8 @@ class ExpensePage extends React.Component {
 
 const addExpensePageData = graphql(expensePageQuery, {
   options(props) {
-    const firstOfCurrentYear = new Date(new Date().getFullYear(), 0, 1).toISOString();
     return {
-      variables: {
-        legacyExpenseId: props.legacyExpenseId,
-        draftKey: props.draftKey,
-        totalExpensesReceivedDateFrom: firstOfCurrentYear,
-      },
+      variables: getVariableFromProps(props),
       context: API_V2_CONTEXT,
     };
   },
