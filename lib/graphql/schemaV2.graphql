@@ -5051,6 +5051,7 @@ type VirtualCard {
   last4: String
   data: JSONObject
   privateData: JSONObject
+  provider: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -9413,6 +9414,7 @@ input VirtualCardInput {
   last4: String
   data: JSONObject
   privateData: JSONObject
+  provider: String
 }
 
 input VirtualCardUpdateInput {
